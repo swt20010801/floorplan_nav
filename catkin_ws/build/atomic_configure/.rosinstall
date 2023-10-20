@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/swt/Floorplan_nav/catkin_ws/devel/setup.sh

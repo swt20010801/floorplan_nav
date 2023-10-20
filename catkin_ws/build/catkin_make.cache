@@ -1,0 +1,2 @@
+navigation
+-DCATKIN_DEVEL_PREFIX=/home/swt/Floorplan_nav/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/swt/Floorplan_nav/catkin_ws/install -G Unix Makefiles
