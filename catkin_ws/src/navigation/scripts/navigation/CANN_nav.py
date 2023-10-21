@@ -182,7 +182,6 @@ def write_to_csv(data, filename):
 
 if __name__ == "__main__":
 
-
     color_init=(0,0,255)
     color_init=tuple(x / 255 for x in color_init)
     color_goal=(0,255,0)
@@ -215,7 +214,7 @@ if __name__ == "__main__":
     house_node_toplogic_edge=house_node_toplogic_edge_dict[House_name]
     house_node_list=house_node_list_dict[House_name]
 
-    House_color_map=cv2.imread("/home/swt/Floorplan_nav/catkin_ws/src/navigation/scripts/laser/unitydataset/House_"+str(house_id+1)+"_color.png")
+    House_color_map=cv2.imread("../unitydataset/House_"+str(house_id+1)+"_color.png")
     House_color_map=cv2.cvtColor(House_color_map, cv2.COLOR_BGR2RGB)
 
     dataforloc_dir="/home/swt/Floorplan_nav/catkin_ws/src/navigation/scripts/laser/localization_input"
@@ -252,12 +251,16 @@ if __name__ == "__main__":
     }
     model = FpLocNet(cfg).to(device=device)
 
-    model.load_state_dict(torch.load("/home/swt/Floorplan_nav/catkin_ws/src/navigation/scripts/laser/try_wo_scheduler.pth"))
+    vis_model_path="../models/try_wo_scheduler.pth"
+    model.load_state_dict(torch.load(vis_model_path))
 
+    action_model_path_1='../models/pointgoal_ddppo.onnx'
+    action_model_path_2='../models/action_distribute_ddppo.onnx'
 
-    action_model=ONNXModel('/home/swt/onnx_test/pointgoal_ddppo.onnx','/home/swt/onnx_test/action_distribute_ddppo.onnx')
+    action_model=ONNXModel(action_model_path_1,action_model_path_2)
 
-    eval_dataset=unityDataset(dataset_dir="/home/swt/Floorplan_nav/catkin_ws/src/navigation/scripts/laser/unitydataset",
+    dataset_dir="../unitydataset"
+    eval_dataset=unityDataset(dataset_dir=dataset_dir,
                               is_training=False,n_sample_points=2048,testing_set=[house_id])
     eval_dataloader=DataLoader(dataset=eval_dataset,
         batch_size=1,
