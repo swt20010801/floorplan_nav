@@ -73,7 +73,7 @@ def poly_verts_to_lines(verts):
 def sample_points_from_lines(lines, interval):
     n_lines = lines.shape[0]
     lengths = np.linalg.norm(lines[:, 0] - lines[:, 1], axis=1)
-    n_samples_per_line = np.ceil(lengths / interval).astype(np.int)
+    n_samples_per_line = np.ceil(lengths / interval).astype(np.int32)
 
     lines_normal = (lines[:, 0] - lines[:, 1]) / np.maximum(
         np.linalg.norm(lines[:, 0] - lines[:, 1], axis=-1, keepdims=True), 1e-8
@@ -126,7 +126,7 @@ def rot_verts(verts, rot):
 def rot_pano(pano, rot):
     pano_rot = np.zeros_like(pano)
     W = pano.shape[1]
-    W_move = np.round(W * (rot % 360 / 360)).astype(np.int)
+    W_move = np.round(W * (rot % 360 / 360)).astype(np.int32)
     pano_rot[:, : (W - W_move)] = pano[:, W_move:]
     pano_rot[:, (W - W_move) :] = pano[:, :W_move]
     return pano_rot

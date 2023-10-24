@@ -1,4 +1,4 @@
-#!/usr/bin/env /home/swt/anaconda3/envs/LLL/bin/python
+#!/usr/bin/env /home/swt/anaconda3/envs/agent/bin/python
 from dataset.unity_dataset import unityDataset
 from dataset.unity_dataset import persp2pano
 
@@ -87,7 +87,7 @@ def render_map(bases, bases_feat,eval_dataset,house_id,border=100):#scaleï¼š1må¯
     for i in range(n_bases):
         bases[i]=eval_dataset.meter2pixel(bases[i],house_id)
 
-    W, H = np.ptp(bases, axis=0).astype(np.int) + int(2 * border )
+    W, H = np.ptp(bases, axis=0).astype(np.int32) + int(2 * border )
     canvas = 255*np.ones((H, W, 3), np.uint8)
 
     door_label = bases_feat[:, -2]
@@ -98,7 +98,7 @@ def render_map(bases, bases_feat,eval_dataset,house_id,border=100):#scaleï¼š1må¯
             color = [42,42,165]
         if window_label[i] > 0.5:
             color = [255, 255, 0]
-        cv2.circle(canvas, tuple(np.round(bases[i]).astype(np.int)), 2, tuple(color))
+        cv2.circle(canvas, tuple(np.round(bases[i]).astype(np.int32)), 2, tuple(color))
     return canvas
 
 
