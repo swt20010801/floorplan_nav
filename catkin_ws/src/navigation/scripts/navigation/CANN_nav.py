@@ -217,11 +217,11 @@ if __name__ == "__main__":
     House_color_map=cv2.imread("../unitydataset/House_"+str(house_id+1)+"_color.png")
     House_color_map=cv2.cvtColor(House_color_map, cv2.COLOR_BGR2RGB)
 
-    dataforloc_dir="/home/swt/Floorplan_nav/catkin_ws/src/navigation/scripts/laser/localization_input"
+    dataforloc_dir="../localization_input"
     dataforloc_dir=os.path.join(dataforloc_dir,House_name)
 
     
-    save_dir="/home/swt/Floorplan_nav/catkin_ws/src/navigation/scripts/laser/trajectory_saved"
+    save_dir="../trajectory_saved"
     save_dir=os.path.join(save_dir,House_name)
 
     if args.wo_topo_nav:
